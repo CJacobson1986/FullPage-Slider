@@ -1,0 +1,30 @@
+/* Slider Styles */
+
+.slider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+}
+
+.sliderIcon {
+  font-size: 1.8em;
+  margin: 5px;
+  padding: 10px;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.slideImage {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+}
