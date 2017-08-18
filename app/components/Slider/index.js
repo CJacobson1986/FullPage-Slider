@@ -16,13 +16,14 @@ export default class Slider extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      images: ['christmas-wolf.jpg', 'gray-wolf-alaska.jpg', 'gray-wolf-closeup.jpg', 'white.lepord.jpg'],
-      activeIndex:0
+      images: ['christmas-wolf.jpg', 'gray-wolf-alaska.jpg', 'gray-wolf-closeup.jpg', 'moonwolf.jpg'],
+      activeIndex:0,
+      slideStyle: "slideImage"
     }
   }
 
   componentDidMount() {
-    //this.autoSlide();
+    this.autoSlide();
   }
 
   renderImage = () => {
@@ -45,11 +46,13 @@ export default class Slider extends React.PureComponent {
     if(activeIndex + 1 < images.length){
       this.setState({
         activeIndex: activeIndex +1,
+        slideStyle:"slideImage slideAnimation"
       })
     }
     else {
       this.setState({
         activeIndex: 0,
+        slideStyle:"slideImage slideAnimation"
       })
     }
   }
@@ -61,11 +64,13 @@ export default class Slider extends React.PureComponent {
     if(activeIndex - 1 >= 0){
       this.setState({
         activeIndex: activeIndex -1,
+        slideStyle:"slideImage slideAnimation"
       })
     }
     else{
     this.setState({
       activeIndex:images.length - 1,
+      slideStyle:"slideImage slideAnimation"
     })
     }
   }
@@ -82,7 +87,7 @@ export default class Slider extends React.PureComponent {
     return (
       <div>
             <div className="slider">
-              <img className="slideImage" src={require('../../images/'+this.renderImage())}/>
+              <img className={this.state.slideStyle} src={require('../../images/'+this.renderImage())}/>
               <LeftIcon className="sliderIcon" onClick={this.previousImage}/>
               <RightIcon className="sliderIcon" onClick={this.nextImage}/>
           </div>
