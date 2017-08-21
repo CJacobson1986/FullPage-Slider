@@ -18,83 +18,162 @@ export default class Slider extends React.PureComponent {
     this.state = {
       images: ['christmas-wolf.jpg', 'gray-wolf-alaska.jpg', 'gray-wolf-closeup.jpg', 'moonwolf.jpg'],
       activeIndex:0,
-      slideStyle: "slideImage"
+      slideStyle: "slideImage slideAnimation"
     }
   }
 
   componentDidMount() {
-    this.autoSlide();
+  this.autoSlide();
+  }
+
+  setAnimation =() => {
+  this.setState({
+    slideStyle: "slideImage slideAnimation"
+    });
+  var _this=this;
+  }
+
+  setAnimation2 =() => {
+    this.setState({
+    slideStyle: "slideImage slideAnimationclick"
+    });
+  var _this=this;
+  }
+
+  resetAnimation =() => {
+   this.setState ({
+     slideStyle: "slideImage"
+    })
   }
 
   renderImage = () => {
-    var images = this.state.images;
-    var activeIndex = this.state.activeIndex;
+  var images = this.state.images;
+  var activeIndex = this.state.activeIndex;
 
-    for(var i=0; i < images.length; i++)
+  for(var i=0; i < images.length; i++)
+  {
+    if(i === activeIndex)
     {
-      if(i === activeIndex)
-      {
-        return images[i];
-      }
+      return images[i];
     }
+  }
   }
 
   nextImage = () => {
+  var images = this.state.images;
+  var activeIndex = this.state.activeIndex;
+
+  if(activeIndex + 1 < images.length){
+    this.setState({
+      activeIndex: activeIndex +1,
+    });
+  }
+  else {
+    this.setState({
+      activeIndex: 0,
+    });
+  }
+  this.setAnimation()
+  }
+
+  previousImage = () => {
+  var images = this.state.images;
+  var activeIndex = this.state.activeIndex;
+
+  if(activeIndex - 1 >= 0){
+    this.setState({
+      activeIndex: activeIndex -1,
+    })
+  }
+  else{
+  this.setState({
+    activeIndex:images.length - 1,
+  });
+  }
+  this.setAnimation()
+  }
+
+  nextImageclick = () => {
     var images = this.state.images;
     var activeIndex = this.state.activeIndex;
 
     if(activeIndex + 1 < images.length){
       this.setState({
         activeIndex: activeIndex +1,
-        slideStyle:"slideImage slideAnimation"
-      })
+      });
     }
     else {
       this.setState({
         activeIndex: 0,
-        slideStyle:"slideImage slideAnimation"
-      })
+      });
     }
   }
 
-  previousImage = () => {
+  previousImageclick = () => {
     var images = this.state.images;
     var activeIndex = this.state.activeIndex;
 
     if(activeIndex - 1 >= 0){
       this.setState({
         activeIndex: activeIndex -1,
-        slideStyle:"slideImage slideAnimation"
       })
     }
     else{
     this.setState({
       activeIndex:images.length - 1,
-      slideStyle:"slideImage slideAnimation"
-    })
+    });
     }
   }
 
+
   autoSlide = () => {
-    var _this = this;
-    setInterval(function() {
-      _this.nextImage();
-    }, 5000);
+  var _this = this;
+  clearInterval(this.state.theInterval);
+  let interval = setInterval(function() {
+    _this.nextImage();
+  }, 5000);
+  this.setState({
+    theInterval: interval,
+  })
   }
 
+  autoSlideout = () => {
+  var _this = this;
+  clearInterval(this.state.theInterval);
+  let interval = setInterval(function() {
+    _this.nextImage();
+  }, 5000);
+  this.setState({
+    theInterval: interval,
+  })
+  }
+
+  stopAutoslide = () => {
+  clearInterval(this.state.theInterval);
+  this.setState ({
+    slideStyle: "stopAutoslide slideImage"
+  })
+  }
 
   render() {
     return (
       <div>
             <div className="slider">
               <img className={this.state.slideStyle} src={require('../../images/'+this.renderImage())}/>
-              <LeftIcon className="sliderIcon" onClick={this.previousImage}/>
-              <RightIcon className="sliderIcon" onClick={this.nextImage}/>
+              <LeftIcon className="sliderIcon"
+                onClick={this.previousImageclick}
+                onMouseOver={this.stopAutoslide}
+                onMouseOut={this.autoSlideout}
+                />
+              <RightIcon className="sliderIcon"
+                onClick={this.nextImageclick}
+                onMouseOver={this.stopAutoslide}
+                onMouseOut={this.autoSlideout}
+                />
           </div>
       </div>
     );
   }
-
 }
 
 

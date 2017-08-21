@@ -31,37 +31,19 @@
 
 .slideAnimation {
   animation-name: fadeIn;
-  animation-duration: 3s;
-  animation-play-state:;
+  animation-duration: 5s;
+  animation-iteration-count:infinite;
 }
 
-.styleOne {
-  animation-name: fadeIn;
-  animation-duration: 3s;
-  animation-play-state:;
+.stopAutoslide {
+animation: none;
 }
 
-.styleTwo {
-  animation-name: fadeIn;
-  animation-duration: 3s;
-  animation-play-state:;
-}
-.styleThree {
-  animation-name: fadeIn;
-  animation-duration: 3s;
-  animation-play-state:;
-}
-.styleFour {
-  animation-name: fadeIn;
-  animation-duration: 3s;
-  animation-play-state:;  
-}
-@keyframes fadeIn{
+@keyframes fadeIn {
   from{
-    opacity: 0;
+    opacity: 0
   }
   to{
-  opacity:1;
+    opacity: 1
   }
-  animation-duration: 2s;
 }
