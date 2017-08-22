@@ -30,6 +30,9 @@ To generate Components:
 ![alt text](http://h4z.it/Image/b487eb_iderCapture3.PNG "Capture 3")
 ![alt text](http://h4z.it/Image/a647eb_iderCapture4.PNG "Capture 4")
 
+## Author
+Christopher Jacobson
+
 ## Thanks
 Special thanks to Technopathic for his React-Boilerplate and the original build scripts.
 
